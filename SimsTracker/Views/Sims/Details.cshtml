@@ -1,0 +1,72 @@
+﻿@model SimsTracker.Models.Sim
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="all-content">
+    <h1>Details for @(Model.firstName + " " + Model.lastName)</h1>
+
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.firstName)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.firstName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.lastName)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.lastName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.age)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.age)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.lifeStage)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.lifeStage)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.gender)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.gender)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.aspiration)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.aspiration)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.hoodName)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.hoodName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.status)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.status)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.notes)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.notes)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" class="edit" asp-route-id="@Model.id">Edit</a> |
+        <a asp-action="Index" class="back" asp-route-hoodName="@Model.hoodName">Back to List</a>
+    </div>
+</div>

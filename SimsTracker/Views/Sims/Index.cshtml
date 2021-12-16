@@ -1,0 +1,166 @@
+﻿
+@model IEnumerable<SimsTracker.Models.Sim>
+@{
+    string hood = "";
+    string home = "";
+    @foreach (var item in Model)
+    {
+        hood = item.hoodName;
+        
+    }
+}
+
+<div class="all-content">
+    <div class="df">
+        <h1>@hood</h1>
+        <div id="filter">
+            <form asp-action="Filter" asp-controller="Sims" id="filter-bar" >
+                <div class="title">
+                    <h3 id="title">Filter by...</h3>
+                </div>
+                <div class="df">
+                    <div class="form-group">
+                        <label for="lifeStage" class="control-label">Life Stage</label>
+                        <select name="lifeStage" class="form-control" id="age">
+                            <option></option> 
+                            <option value="Baby">Baby</option> 
+                            <option value="Toddler">Toddler</option> 
+                            <option value="Child">Child</option> 
+                            <option value="Teen">Teen</option> 
+                            <option value="Young Adult">Young Adult</option> 
+                            <option value="Adult">Adult</option> 
+                            <option value="Elder">Elder</option> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="aspiration" class="control-label">Aspiration</label>
+                        <select name="aspiration" class="form-control" id="1">
+                                <option></option> 
+                                <option value="Fortune">Fortune</option> 
+                                <option value="Knowledge">Knowledge</option> 
+                                <option value="Family">Family</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Popularity">Popularity</option>
+                                <option value="Pleasure">Pleasure</option>
+                                <option value="Grow Up">Grow Up</option> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender" class="control-label">Gender</label>
+                        <select name="gender" class="form-control">
+                                <option></option> 
+                                <option value="Male">Male</option> 
+                                <option value="Female">Female</option> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status" class="control-label">Status</label>
+                        <select name="status" class="form-control" id="1">
+                                <option></option> 
+                                <option value="Alive">Alive</option> 
+                                <option value="Deceased">Deceased</option> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Apply" class="btn btn-primary fix" />
+                    </div>
+                    <div class="form-group">
+                        <input  type="submit" id="reset" value="Reset" asp-action="Reset" class="btn btn-primary fix"/>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.firstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lifeStage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.aspiration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.hoodName)
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lifeStage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.aspiration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hoodName)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn-primary btn btn-more" asp-route-id="@item.id">Edit</a> 
+                    <a asp-action="Details"  class="btn-primary btn btn-more" asp-route-id="@item.id">Details</a> 
+                    <a asp-action="Delete"  class="btn-danger btn btn-more" asp-route-id="@item.id">Delete</a>
+                     @if(item.status == "Alive" && item.lifeStage == "Teen")
+                     {
+                         <a asp-action="SendToCollege"  class="btn-primary btn btn-more" asp-route-id="@item.id">Send to College</a>
+                     }
+                     @if(item.status == "Alive" && item.lifeStage == "Young Adult")
+                     {
+                         <a asp-action="ExitCollege"  class="btn-primary btn btn-more" asp-route-id="@item.id">Drop from College</a>
+                     }
+                     @if(item.status == "Alive" && item.aspiration != "Grow Up")
+                     {
+                         <a asp-action="Kill"  class="btn-primary btn btn-more" asp-route-id="@item.id">Kill</a>
+                     }
+                     @if(item.status == "Deceased")
+                     {
+                         <a asp-action="Resurrect"  class="btn-primary btn btn-more" asp-route-id="@item.id">Resurrect</a>
+                     }
+                    </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <div style="display:flex">
+        <a asp-action="Create" asp-route-hoodName="@hood" class="btn btn-primary">Add new sim</a>
+        <div class="divider"></div>
+        <a asp-controller="Sims" asp-action="AgeUp" asp-route-hood="@hood" class="btn btn-primary">Age up neighborhood</a>
+    </div>
+    <script src="..\Controllers\SimsController.cs"></script>
+    <script>
+        var box = 
+    </script>
+</div>

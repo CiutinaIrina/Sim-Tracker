@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SimsTracker.Models.Hood>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="all-content">
+    <div class="mini-header">
+        <h1>Your Neighborhoods</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.population)
+                </th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.population)
+                </td>
+                <td class="options">
+                    <a asp-action="Edit" class="btn-primary btn btn-more" asp-route-id="@item.id">Edit</a>  
+                    <a asp-action="Details" class="btn-primary btn btn-more" asp-route-id="@item.id">Sims</a>  
+                    <a asp-action="Delete" class="btn-danger btn btn-more" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New Neighborhood</a>
+    </p>
+</div>

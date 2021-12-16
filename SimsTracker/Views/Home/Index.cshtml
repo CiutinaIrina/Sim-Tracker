@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center" id="main-page">
+    <div id="music">
+        <video id="audio" autoplay="autoplay" preload="metadata" class="hide" loop="loop" controls>
+            <source src="..\music\The Sims™ 2 Soundtrack_ Main Theme.mp3" type="audio/mp3"/>
+        </video>
+        <div id="music-switch" onClick="togglePlay();switchIcons()">
+            <img src="~/pictures/play.png" id="play" class="hide"/>
+            <img src="~/pictures/pause.png" id="pause"/>
+        </div>
+    </div>
+    <div class="text-box-main">
+        <h1>Welcome to the unofficial sim neighborhood tracker!</h1>
+        
+        <a class="nav-link text-dark" asp-area="" asp-controller="Hoods" asp-action="Index">Go to the hoods...</a>
+    </div>
+</div>
+
+
+    <script>
+        function togglePlay() {
+            var a = document.getElementById("audio");
+            var i = a.paused;
+            var play = document.getElementById("play");
+            var pause = document.getElementById("pause");
+            if(i==false){
+                play.classList.remove("hide");
+                pause.classList.add("hide");
+            }else{
+                pause.classList.remove("hide");
+                play.classList.add("hide");
+            }
+            return a.paused ? a.play() : a.pause();
+        };
+    </script>
